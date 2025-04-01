@@ -1,0 +1,58 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.container {
+  height: 25rem;
+  width: 50rem;
+  border: white solid;
+  margin-top: 1rem;
+}
+
+.add-task-container {
+  display: flex;
+  flex-direction: row;
+  width: 50rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.ant-input:hover,
+.ant-input:focus,
+.ant-input-focused {
+  border-color: #646cffaa !important;
+}
+
+.checked {
+  text-decoration: line-through;
+  color: gray;
+  opacity: 0.7;
+}
+
+.custom-checkbox .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #52c41a !important;
+  border-color: #52c41a !important;
+}
+
+.custom-checkbox .ant-checkbox-checked::after {
+  border-color: #52c41a !important;
+}
