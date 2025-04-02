@@ -1,11 +1,9 @@
 import "./App.css";
-import MainContainer from "./components/MainContainer";
-import { MainHeader } from "./components/MainHeader";
+import { MainContainer } from "./components/MainContainer";
 
 function App() {
   return (
     <div>
-      <MainHeader />
       <MainContainer />
     </div>
   );

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Checkbox, Form, Input, Row } from "antd";
 import { MdDelete } from "react-icons/md";
 import { FaCheck, FaEdit } from "react-icons/fa";
+import { MainHeader } from "./MainHeader";
 
 type Task = { value: string; id: number | string; checked: boolean };
 type FormValues = { task: string };
@@ -9,14 +10,24 @@ type FormValues = { task: string };
 export const MainContainer = () => {
   const [selectedTask, setSelectedTask] = useState<string | number>("");
   const [editedValue, setEditedValue] = useState<string>("");
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>(
+    JSON.parse(localStorage.getItem("tasks") || "[]")
+  );
 
   const [form] = Form.useForm<FormValues>();
 
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
   function onFinish(values: FormValues) {
     const { task } = values;
+
+    if (!task) return;
+
     const id = crypto.randomUUID();
     const currentTask = { value: task, id, checked: false };
+
     setTasks((prevValues) => [...prevValues, currentTask]);
     form.resetFields();
   }
@@ -35,39 +46,37 @@ export const MainContainer = () => {
   function deleteTask(id: number | string) {
     setTasks((prevValues) => prevValues.filter((task) => task.id !== id));
   }
+
   return (
-    <>
-      <Form className="add-task-container" onFinish={onFinish} form={form}>
-        <Form.Item name="task" required>
+    <div className="flex flex-col items-center p-4 bg-gray-900">
+      <MainHeader />
+      <Form
+        className="flex flex-row gap-4 w-[30rem]"
+        onFinish={onFinish}
+        form={form}
+      >
+        <Form.Item name="task" required className="w-full">
           <Input
-            style={{
-              width: "30rem",
-              backgroundColor: "black",
-              color: "white",
-              borderRadius: "4px",
-              padding: 8,
-            }}
+            className="w-full p-2 bg-gray-800 text-white border border-gray-700 rounded-md focus:ring focus:ring-blue-500"
+            placeholder="Digite sua tarefa..."
           />
         </Form.Item>
         <Form.Item>
-          <button className="custom-button">Adicionar</button>
+          <Button
+            htmlType="submit"
+            className="w-full p-2 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600 transition"
+          >
+            Adicionar
+          </Button>
         </Form.Item>
       </Form>
-      <div className="container">
+
+      <div className="w-[50rem] h-[25rem] overflow-auto border border-gray-700 rounded-lg p-4 bg-gray-800 mt-4 shadow-lg">
         {tasks?.map((task: Task) =>
           task.id === selectedTask ? (
             <Row
-              style={{
-                padding: "10px",
-                backgroundColor: "#fff",
-                border: "1px solid #ddd",
-                borderRadius: "8px",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                marginBottom: 10,
-              }}
+              key={task.id}
+              className="p-2.5 bg-white border border-gray-300 rounded-lg shadow-md flex items-center justify-between mb-2.5"
             >
               <Input
                 ref={(input) => {
@@ -79,38 +88,23 @@ export const MainContainer = () => {
                   if (event.key === "Enter") finishEdit();
                 }}
                 value={editedValue}
-                style={{
-                  margin: 0,
-                  fontSize: "16px",
-                  fontWeight: "500",
-                  color: "#333",
-                  width: "90%",
-                }}
-                onChange={(event) => {
-                  setEditedValue(event.target.value);
-                }}
+                onChange={(event) => setEditedValue(event.target.value)}
+                style={{ width: "40rem" }}
               />
-              <Button icon={<FaCheck />} onClick={finishEdit} />
+              <Button
+                className="ml-2 p-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition"
+                icon={<FaCheck />}
+                onClick={finishEdit}
+              />
             </Row>
           ) : (
             <Row
               key={task.id}
-              style={{
-                padding: "10px",
-                gap: "16px",
-                backgroundColor: "#fff",
-                border: "1px solid #ddd",
-                borderRadius: "8px",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                marginBottom: 10,
-              }}
+              className="p-2.5 gap-4 bg-gray-700 border border-gray-600 rounded-lg shadow-md flex items-center justify-between mb-2.5"
             >
-              <div style={{ display: "flex", flexDirection: "row", gap: 10 }}>
+              <div className="flex gap-2 flex-row items-center">
                 <Checkbox
-                  className="custom-checkbox"
+                  className="w-5 h-5"
                   checked={task.checked}
                   onChange={(event) => {
                     setTasks((prevValues) =>
@@ -125,39 +119,32 @@ export const MainContainer = () => {
                   }}
                 />
                 <p
-                  className={task.checked ? "checked" : ""}
-                  style={{
-                    margin: 0,
-                    fontSize: "16px",
-                    fontWeight: "500",
-                    color: "#333",
-                  }}
+                  className={`m-0 text-base font-medium ${
+                    task.checked ? "text-gray-400 line-through" : "text-white"
+                  }`}
                 >
                   {task.value}
                 </p>
               </div>
-              <div style={{ display: "flex", gap: "10px" }}>
+              <div className="flex gap-2">
                 <Button
+                  className="p-2 transition"
                   onClick={() => deleteTask(task.id)}
                   icon={<MdDelete />}
-                  type="primary"
-                  danger
                 />
                 <Button
+                  className="p-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition"
                   onClick={() => {
                     setSelectedTask(task.id);
                     setEditedValue(task.value);
                   }}
                   icon={<FaEdit />}
-                  type="default"
                 />
               </div>
             </Row>
           )
         )}
       </div>
-    </>
+    </div>
   );
 };
-
-export default MainContainer;
