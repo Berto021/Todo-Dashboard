@@ -53,6 +53,11 @@ O projeto estará disponível em **http://localhost:5173/** (caso esteja usando 
 ## 📸 Captura de Tela
 ![image](https://github.com/user-attachments/assets/89584a04-3855-4983-acc9-daf490162e48)
 
+## 🔮 Melhorias Futuras
+
+- 🔍 Adicionar flags nas tarefas
+- 🎨 Permitir personalização de temas (claro/escuro)
+- 📊 Dashboard de produtividade e gráficos com base nas tarefas e respectivas flags
 
 
 
