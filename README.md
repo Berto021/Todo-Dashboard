@@ -1,54 +1,58 @@
-# React + TypeScript + Vite
+# 📝 Tarefas Diárias
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é um projeto de lista de tarefas (To-Do List) desenvolvido com **React**, **TypeScript** e **Tailwind CSS**. Ele permite adicionar, editar, marcar como concluídas e excluir tarefas de forma intuitiva. O principal motivo de criar esse todo foi para me auxiliar nas tasks do dia a dia
 
-Currently, two official plugins are available:
+## 🚀 Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React** - Biblioteca para construção da interface do usuário.
+- **TypeScript** - Superconjunto do JavaScript que adiciona tipagem estática ao código.
+- **Tailwind CSS** - Framework CSS utilitário para estilização rápida e responsiva.
+- **Ant Design** - Biblioteca de componentes UI para React.
 
-## Expanding the ESLint configuration
+## 🎨 Layout
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+O projeto conta com um design moderno e responsivo, utilizando **Tailwind CSS** para estilização rápida e consistente. A interface possui um tema escuro por padrão.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 📦 Instalação e Execução
+
+Para rodar o projeto localmente, siga os passos abaixo:
+
+### 1️⃣ Clone o repositório
+```bash
+git clone https://github.com/Berto021/Todo-Dashboard.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 2️⃣ Acesse a pasta do projeto
+```bash
+cd Todo-Dashboard
 ```
+
+### 3️⃣ Instale as dependências
+```bash
+yarn install
+# ou npm install
+```
+
+### 4️⃣ Execute o projeto
+```bash
+yarn dev
+# ou npm run dev
+```
+
+O projeto estará disponível em **http://localhost:5173/** (caso esteja usando Vite) ou **http://localhost:3000/** (caso esteja usando CRA).
+
+## 📌 Funcionalidades
+
+- ✅ **Adicionar** tarefas
+- ✏️ **Editar** tarefas
+- 📌 **Marcar como concluída**
+- ❌ **Excluir** tarefas
+- 💾 **Persistência dos dados no LocalStorage**
+- 📱 **Responsivo** para dispositivos móveis e desktops
+
+## 📸 Captura de Tela
+![image](https://github.com/user-attachments/assets/89584a04-3855-4983-acc9-daf490162e48)
+
+
+
+
